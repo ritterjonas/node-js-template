@@ -11,12 +11,6 @@ class Post extends Model {
             return this.updated_at !== this.created_at;
           },
         },
-        imageUrl: {
-          type: Sequelize.VIRTUAL,
-          get() {
-            return this.image ? this.image.url : null;
-          },
-        },
       },
       {
         sequelize,

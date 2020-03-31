@@ -1,38 +1,34 @@
-import Post from '../models/Post';
-import File from '../models/File';
+import PostService from '../services/PostService';
 
 class PostController {
   async index(req, res) {
-    const posts = await Post.findAll({
-      include: [
-        {
-          model: File,
-          as: 'image',
-          attributes: ['name', 'path', 'url'],
-        },
-      ],
-    });
+    const posts = await PostService.all();
+
     return res.json({ success: true, data: posts });
   }
 
-  async store(req, res) {
-    const post = await Post.create(req.body);
+  async get(req, res) {
+    const post = await PostService.find(req.params.id);
 
     return res.json({ success: true, data: post });
   }
 
-  async update(req, res) {
-    const { text } = req.body;
+  async post(req, res) {
+    const post = await PostService.create(req.body);
 
-    const post = await Post.findByPk(req.params.id);
+    return res.json({ success: true, data: post });
+  }
 
-    if (!post) {
-      return res.status(404).json({ error: 'Post not found' });
-    }
+  async put(req, res) {
+    const post = await PostService.update(req.params.id, req.body);
 
-    const newPost = await post.update({ text, edited: true });
+    return res.json({ success: true, data: post });
+  }
 
-    return res.json(newPost);
+  async delete(req, res) {
+    const post = await PostService.delete(req.params.id);
+
+    return res.json({ success: true, data: post });
   }
 }
 

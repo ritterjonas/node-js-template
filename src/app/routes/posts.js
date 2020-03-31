@@ -5,15 +5,9 @@ import PostController from '../controllers/PostController';
 import validate from '../middlewares/ValidatorMiddleware';
 import postValidator from '../validators/PostValidator';
 
-const routes = new Router();
-
-routes.get('/', PostController.index);
-routes.post('/', validate(postValidator.store(), 'body'), PostController.store);
-
-routes.put(
-  '/:id',
-  validate(postValidator.update(), 'body'),
-  PostController.update
-);
-
-export default routes;
+export default Router()
+  .get('/', PostController.index)
+  .get('/:id', PostController.get)
+  .post('/', validate(postValidator.store(), 'body'), PostController.post)
+  .put('/:id', validate(postValidator.update(), 'body'), PostController.put)
+  .delete('/:id', PostController.delete);

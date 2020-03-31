@@ -1,4 +1,5 @@
 import * as Joi from 'joi';
+import BadRequestException from '../exceptions/BadRequestException';
 
 export default (schema, property) => {
   return (req, res, next) => {
@@ -11,9 +12,7 @@ export default (schema, property) => {
       const { details } = error;
       const message = details.map(i => i.message).join(', ');
 
-      res.status(400).json({
-        error: message,
-      });
+      throw new BadRequestException(message);
     }
   };
 };
