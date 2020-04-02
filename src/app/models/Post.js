@@ -11,6 +11,12 @@ class Post extends Model {
             return this.updated_at !== this.created_at;
           },
         },
+        likesCount: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            return this.likes ? this.likes.length : 0;
+          },
+        },
       },
       {
         sequelize,
@@ -22,6 +28,7 @@ class Post extends Model {
 
   static associate(models) {
     this.belongsTo(models.File, { foreignKey: 'file_id', as: 'image' });
+    this.hasMany(models.Like, { as: 'likes' });
   }
 }
 

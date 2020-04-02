@@ -1,15 +1,16 @@
-import File from '../models/File';
+import FileService from '../services/FileService';
 
 class FileController {
   async store(req, res) {
-    const { originalname: name, filename: path } = req.file;
+    const file = await FileService.create(req.file);
 
-    const file = await File.create({
-      name,
-      path,
+    return res.json({
+      success: true,
+      data: {
+        id: file.id,
+        imageUrl: file.url,
+      },
     });
-
-    return res.json(file);
   }
 }
 

@@ -10,4 +10,5 @@ export default Router()
   .get('/:id', PostController.get)
   .post('/', validate(postValidator.store(), 'body'), PostController.post)
   .put('/:id', validate(postValidator.update(), 'body'), PostController.put)
-  .delete('/:id', PostController.delete);
+  .delete('/:id', PostController.delete)
+  .post('/:id/likes', PostController.like);
