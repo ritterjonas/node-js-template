@@ -5,7 +5,9 @@ import path from 'path';
 import Youch from 'youch';
 import 'express-async-errors';
 
+import swaggerUi from 'swagger-ui-express';
 import routes from './app/routes';
+import specs from './swagger';
 
 import './database';
 
@@ -28,6 +30,7 @@ class App {
 
   routes() {
     this.server.use('/api', routes);
+    this.server.use('/docs', swaggerUi.serve, swaggerUi.setup(specs));
   }
 
   exceptionHandler() {
