@@ -6,11 +6,11 @@ const formatObject = (data, fields) => {
 
     if (Array.isArray(field)) {
       newObj[field[1]] = field[0].split('.').reduce(function(p, prop) {
-        return p[prop];
+        return p ? p[prop] : null;
       }, data);
     } else {
       newObj[field] = field.split('.').reduce(function(p, prop) {
-        return p[prop];
+        return p ? p[prop] : null;
       }, data);
     }
   });

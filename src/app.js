@@ -30,7 +30,7 @@ class App {
 
   routes() {
     this.server.use('/api', routes);
-    this.server.use('/docs', swaggerUi.serve, swaggerUi.setup(specs));
+    this.server.use('/', swaggerUi.serve, swaggerUi.setup(specs));
   }
 
   exceptionHandler() {
