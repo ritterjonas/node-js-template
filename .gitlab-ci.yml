@@ -1,5 +1,2 @@
 include:
   - local: SAST.gitlab-ci.yml
-
-variables:
-  SAST_GOSEC_LEVEL: 2
