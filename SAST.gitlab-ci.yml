@@ -11,9 +11,7 @@ sast:
   artifacts:
     reports:
       sast: gl-sast-report.json
-  only:
-    refs:
-      - branches
+
     variables:
       - $GITLAB_FEATURES =~ /\bsast\b/
   image: docker:stable
