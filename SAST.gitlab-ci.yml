@@ -1,0 +1,16 @@
+variables:
+  SAST_ANALYZER_IMAGE_PREFIX: "registry.gitlab.com/gitlab-org/security-products/analyzers"
+  SAST_DEFAULT_ANALYZERS: "nodejs-scan"
+  SAST_ANALYZER_IMAGE_TAG: 2
+  SAST_DISABLE_DIND: "false"
+  SCAN_KUBERNETES_MANIFESTS: "false"
+
+nodejs-scan-sast:
+  extends: .sast-analyzer
+  image:
+    name: "$SAST_ANALYZER_IMAGE_PREFIX/nodejs-scan:$SAST_ANALYZER_IMAGE_TAG"
+  only:
+    variables:
+      - $GITLAB_FEATURES =~ /\bsast\b/ &&
+          $SAST_DEFAULT_ANALYZERS =~ /nodejs-scan/ &&
+          $CI_PROJECT_REPOSITORY_LANGUAGES =~ /\bjavascript\b/
