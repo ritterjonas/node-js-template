@@ -1,5 +1,5 @@
 include:
-  - template: SAST.gitlab-ci.yml
+  - local: SAST.gitlab-ci.yml
 
 variables:
   SAST_GOSEC_LEVEL: 2
