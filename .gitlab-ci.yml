@@ -3,4 +3,3 @@ include:
 
 variables:
   SAST_GOSEC_LEVEL: 2
-  SAST_DISABLE_DIND: "true"
